@@ -24,6 +24,7 @@ namespace Bootcamp3_AspMVC.Controllers
             return View(categories);
         }
 
+
         public IActionResult Create()
         {
 
@@ -36,6 +37,41 @@ namespace Bootcamp3_AspMVC.Controllers
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+        [HttpGet]
+        public IActionResult Edit(int Id)
+        {
+            var category = _context.Categories.Find(Id);
+            return View(category);
+        }
+
+
+
+        [HttpPost]
+        public IActionResult Edit(Category category)
+        {
+            _context.Categories.Update(category);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        [HttpGet]
+        public IActionResult Delete(int Id)
+        {
+            var category = _context.Categories.Find(Id);
+            return View(category);
+        }
+
+
+
+        [HttpPost]
+        public IActionResult Delete(Category category)
+        {
+            _context.Categories.Remove(category);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
 
 
     }
